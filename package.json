@@ -34,6 +34,7 @@
     "lodash.defaults": "^4.0.1",
     "lodash.isarray": "^4.0.0",
     "lodash.isempty": "^4.1.2",
-    "lodash.isfunction": "^3.0.8"
+    "lodash.isfunction": "^3.0.8",
+    "electron-spell-check-provider": "git+https://github.com/hss-dev/electron-editor-context-menu.git#1.0.0"
   }
 }
