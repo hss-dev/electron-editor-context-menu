@@ -6,7 +6,7 @@ var isArray = require('lodash.isarray');
 var cloneDeep = require('lodash.clonedeep');
 var BrowserWindow = require('electron').BrowserWindow;
 var Menu = require('electron').Menu;
-var SpellCheckerProvider = require('electron-spell-check-provider');
+var spellchecker = require('spellchecker');
 
 
 var DEFAULT_MAIN_TPL = [{
@@ -91,20 +91,20 @@ var buildEditorContextMenu = function(selection, mainTemplate, suggestionsTempla
   var template = getTemplate(mainTemplate, DEFAULT_MAIN_TPL);
   var suggestionsTpl = getTemplate(suggestionsTemplate, DEFAULT_SUGGESTIONS_TPL);
   
-  var addOptionTpl = {    
-	  label: 'Add to Dictionary',
-	  click: function() {	      
-	      if(SpellCheckerProvider) {
-	          SpellCheckerProvider.add(selection);
-	          console.log("added " + selection + "to dictionary");
-	      }
-	  }	  
-  };
+//  var addOptionTpl = {    
+//	  label: 'Add to Dictionary',
+//	  click: function() {	      
+//	      if(spellchecker) {		  
+//		  spellchecker.add(selection.text);
+//	          console.log("added " + selection.text + " to dictionary");
+//	      }
+//	  }	  
+//  };
 
   if (selection.isMisspelled) {
     var suggestions = selection.spellingSuggestions;
     if (isEmpty(suggestions)) {
-      suggestionsTpl.concat(addOptionTpl);	
+//      suggestionsTpl.concat(addOptionTpl);	
       template.unshift.apply(template, suggestionsTpl);
     } else {
       template.unshift.apply(template, suggestions.map(function(suggestion) {
@@ -114,7 +114,8 @@ var buildEditorContextMenu = function(selection, mainTemplate, suggestionsTempla
             BrowserWindow.getFocusedWindow().webContents.replaceMisspelling(suggestion);
           }
         };
-      }).concat(addOptionTpl).concat({
+      })//.concat(addOptionTpl)
+      .concat({
         type: 'separator'
       }));
     }
