@@ -31,7 +31,7 @@ var DEFAULT_MAIN_TPL = [{
   click: function() {
       remote.getCurrentWebContents().pasteAndMatchStyle();
   }
-},*/ {
+}, {
   label: 'Select All',
   role: 'selectall'
 }];
