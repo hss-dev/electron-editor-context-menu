@@ -4,8 +4,8 @@ var isEmpty = require('lodash.isempty');
 var isFunction = require('lodash.isfunction');
 var isArray = require('lodash.isarray');
 var cloneDeep = require('lodash.clonedeep');
-var BrowserWindow = require('electron').BrowserWindow;
-var Menu = require('electron').Menu;
+const remote = require('electron').remote;
+const Menu = remote.Menu;
 var spellchecker = require('spellchecker');
 
 
@@ -26,10 +26,10 @@ var DEFAULT_MAIN_TPL = [{
 }, {
   label: 'Paste',
   role: 'paste'
-}, /*{
+}, {
   label: 'Paste and Match Style',
   click: function() {
-    BrowserWindow.getFocusedWindow().webContents.pasteAndMatchStyle();
+      remote.getCurrentWebContents().pasteAndMatchStyle();
   }
 },*/ {
   label: 'Select All',
@@ -111,7 +111,7 @@ var buildEditorContextMenu = function(selection, mainTemplate, suggestionsTempla
         return {
           label: suggestion,
           click: function() {
-            BrowserWindow.getFocusedWindow().webContents.replaceMisspelling(suggestion);
+              remote.getCurrentWebContents().replaceMisspelling(suggestion);
           }
         };
       })//.concat(addOptionTpl)
